@@ -1,3 +1,8 @@
+import tkinter
+from tkinter import *
+TK = Tk()
+
+TK.title("Culculator")
 
 def Minus(a,b):
     minus = a-b
@@ -19,20 +24,52 @@ def Sum(a,b):
     sum = a+b
     return sum
 
-
-answer = Sum(1,5.5)
-answer_minus = Minus(9,8)
-answer_Divide = Divide(20,5)
-answer_remainder = Remainder(4,3)
-answer_multipluy = Multipluy(10,10.0)
-
-print(F"The result of invoking Sum(1,5.5) is {answer}")
-
-print(f"The result of invoking Minus(9,8) is {answer_minus}")
-
-print(F"The result of invoking Multipluy(10,10) is {answer_multipluy}")
+def draw_button1():
+    global text
+    text+= "1"
 
 
-print(F"The result of invoking Divide(20,5) is {answer_Divide}")
+width_of_screen = 1000
+height_of_screen = 1000
+bgcolor = "White"
 
-print(F"The result of invoking Remainder(4,3) is {answer_remainder}")
+screen = Canvas(TK,width = width_of_screen, height = height_of_screen, bg = bgcolor)
+screen.pack()
+text = screen.create_text(100,100,font="Arial 18",text="1")
+button_size = 100
+X = 100
+Y = 100
+button_colour = "Black"
+button1 = screen.create_rectangle(X,Y,X + button_size,Y + button_size,fill = button_colour )
+screen.tag_bind(button1, "<Button>", draw_button1)
+
+
+number_1 = 0 
+symbol = "-"
+number_2 = 0
+
+answer = 0.0
+
+
+if symbol == "+":
+    answer = Sum(number_1,number_2)
+
+elif symbol == "-":
+    answer = Minus(number_1,number_2)
+
+elif symbol == "%":
+    answer = Remainder(number_1,number_2)
+
+elif symbol == "*":
+    answer = Multipluy(number_1,number_2)
+
+elif symbol == "/":
+    answer = Divide(number_1,number_2)
+
+else:
+    print(f"the symbol is not a symbol: {symbol}")
+
+
+print(F"The result of the method is is {answer}")
+
+TK.mainloop()
