@@ -94,8 +94,8 @@ def apply_buttons_horizontal_layout():
     draw_button(init_button_x+button_size*7+button_margin_x*7,          init_button_y,    button_size,    button_size,    "8",    button_colour,  text_color)
     draw_button(init_button_x+button_size*8+button_margin_x*8,          init_button_y,    button_size,    button_size,    "9",    button_colour,  text_color)
     draw_button(init_button_x+button_size*9+button_margin_x*9,          init_button_y,    button_size,    button_size,    "0",    button_colour,  text_color)
-    draw_button(init_button_x+button_size*10+button_margin_x*10,        init_button_y,    button_size,    button_size,    "+",    button_colour,  text_color)
     draw_button(init_button_x+button_size*11+button_margin_x*11,        init_button_y,    button_size,    button_size,    "-",    button_colour,  text_color)
+    draw_button(init_button_x+button_size*10+button_margin_x*10,        init_button_y,    button_size,    button_size,    "+",    button_colour,  text_color)
     draw_button(init_button_x+button_size*12+button_margin_x*13,        init_button_y,    button_size,    button_size,    "/",    button_colour,  text_color)
     draw_button(init_button_x+button_size*13+button_margin_x*14,        init_button_y,    button_size,    button_size,    "*",    button_colour,  text_color)
     draw_button(init_button_x+button_size*14+button_margin_x*15,        init_button_y,    button_size,    button_size,    "%",    button_colour,  text_color)
@@ -122,12 +122,7 @@ def apply_buttons_2d_layout():
     
     draw_button_equals(init_button_x+button_size*4+button_margin_x*5,                  init_button_y+button_size*3+button_margin_y*3,    button_size,    button_size,    "=",    button_colour,  text_color)
     
-#    draw_button(init_button_x+button_size*10+button_margin_x*10,                init_button_y,    button_size,    button_size,    "+",    button_colour,  text_color)
-#    draw_button(init_button_x+button_size*11+button_margin_x*11,                init_button_y,    button_size,    button_size,    "-",    button_colour,  text_color)
-#    draw_button(init_button_x+button_size*12+button_margin_x*13,                init_button_y,    button_size,    button_size,    "/",    button_colour,  text_color)
-#    draw_button(init_button_x+button_size*13+button_margin_x*14,                init_button_y,    button_size,    button_size,    "*",    button_colour,  text_color)
-#    draw_button(init_button_x+button_size*14+button_margin_x*15,                init_button_y,    button_size,    button_size,    "%",    button_colour,  text_color)
-#    draw_button_equals (init_button_x+button_size*15+button_margin_x*16,        init_button_y,    button_size,    button_size,    "=",    button_colour,  text_color)
+
 
 
 def draw_button_symbol(x, y, width, height, button_text, button_colour, text_color):
@@ -188,24 +183,13 @@ def draw_button(x, y, width, height, button_text, button_colour, text_color):
 #                symbol = i
 #    return number_1
 
-#def get_number(expression, index):
-#    num = "" 
-#    while index < len(expression) and expression[index].isdigit():
-#        num += expression[index]
-#        index += 1 
-#        return int(num), index 
-#def evaluate(expression):
-#    expression = expression.rstrip("=") 
-#    index = 0 
-#    result, index = get_number(expression, index) 
-#    while index < len(expression): operator = expression[index] # Оператор (+ или -) index += 1 # Переход к следующему числу num, index = get_number(expression, index) if operator == '+': result += num elif operator == '-': result -= num
 
 def get_number(expression, index):
     num = ""
-    while index < len(expression) and expression[index].isdigit():
+    while index < len(expression) and (expression[index].isdigit() or expression[index] == "."):
         num += expression[index]
         index += 1
-    return int(num), index
+    return float(num), index
 
 def evaluate(expression):
     index = 0
@@ -236,44 +220,5 @@ def on_button_clicked_equals():
     text_view = screen.create_text(initial_text_field_X+button_size,    initial_text_field_Y+button_size/2,   font = "Arial 28",  text = text_to_parse,   fill = "red")
 
 screen.pack()
-
-#X = 100
-#Y = 100
-#button1 = screen.create_rectangle(X,Y,X + button_size,Y + button_size,fill = button_colour )
-#screen.tag_bind(button1, "<Button>", draw_button1)
-
-
-
 apply_buttons_2d_layout()
-
-
-
-number_1 = 0 
-symbol = "-"
-number_2 = 0
-
-answer = 0.0
-
-
-if symbol == "+":
-    answer = Sum(number_1,number_2)
-
-elif symbol == "-":
-    answer = Minus(number_1,number_2)
-
-elif symbol == "%":
-    answer = Remainder(number_1,number_2)
-
-elif symbol == "*":
-    answer = Multipluy(number_1,number_2)
-
-elif symbol == "/":
-    answer = Divide(number_1,number_2)
-
-else:
-    print(f"the symbol is not a symbol: {symbol}")
-
-
-print(F"The result of the method is is {answer}")
-
 Window.mainloop()
